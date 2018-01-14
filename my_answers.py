@@ -38,21 +38,14 @@ def build_part1_RNN(window_size):
 
 ### TODO: return the text input with only ascii lowercase and the punctuation given below included.
 def cleaned_text(text):
-    punctuation = ['!', ',', '.', '?']
+    punctuation = [' ','!', ',', '.', ':', ';', '?']
 
-    remove_chars = {'@', '^', '--', '-', ';', '{', '}', '+', '-', '<', '>', '\"', '#', '*', '=', '&', '(', ')', '\'',
-                    '\\', '/', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '$', '%', '~', '_', '[', ']', '|', '`',
-                    ':', ' , ', ' ., ', ' .f. . ', ' .f. ', ' .e. . ', '\n', '\r'}
+    valid_chars = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
+                   't', 'u', 'v', 'w', 'x', 'y', 'z'] + punctuation
 
-    for ch in remove_chars:
-        if ch in text:
-            text = text.replace(ch, ' ')
+    text = [i for i in text if i in valid_chars]
 
-    text = text.replace(' .', '.')
-    text = text.replace(' s', 's')
-    text = text.replace('  ', ' ')
-
-    return text
+    return ''.join(text)
 
 ### TODO: fill out the function below that transforms the input text and window-size into a set of input/output pairs for use with our RNN model
 def window_transform_text(text, window_size, step_size):
